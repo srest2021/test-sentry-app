@@ -9,7 +9,25 @@ Sentry.init({
   // For example, automatic IP address collection on events
   sendDefaultPii: true,
   integrations: [
-    Sentry.replayIntegration()
+    Sentry.replayIntegration(),
+    Sentry.feedbackIntegration({
+      // The SDK will automatically create a button and inject it into the DOM
+      // You can also customize the button appearance
+      colorScheme: "system",
+      showBranding: true,
+      // You can customize the form fields
+      formTitle: "Send us feedback",
+      formButtonLabel: "Send feedback",
+      // You can add custom fields
+      additionalFields: [
+        {
+          type: "text",
+          name: "user_type",
+          label: "User Type",
+          required: false,
+        },
+      ],
+    }),
   ],
   // Session Replay
   replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
