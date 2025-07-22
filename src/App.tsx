@@ -1,12 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+  dsn: "https://e085f3c06a482717f7e48980f2cb2145@o19635.ingest.us.sentry.io/4509713449680896",
+  // Setting this option to true will send default PII data to Sentry.
+  // For example, automatic IP address collection on events
+  sendDefaultPii: true,
+  integrations: [
+    Sentry.replayIntegration()
+  ],
+  // Session Replay
+  replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+  replaysOnErrorSampleRate: 1.0 // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+});
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -18,6 +31,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
       </header>
     </div>
   );
