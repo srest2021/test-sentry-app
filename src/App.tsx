@@ -4,7 +4,7 @@ import './App.css';
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: "https://e085f3c06a482717f7e48980f2cb2145@o19635.ingest.us.sentry.io/4509713449680896",
+  dsn: "https://7ba3dd399bcd09c145c91ac1ce022568@o4509714332450816.ingest.us.sentry.io/4509725614735360",
   // Setting this option to true will send default PII data to Sentry.
   // For example, automatic IP address collection on events
   sendDefaultPii: true,
