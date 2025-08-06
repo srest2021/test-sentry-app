@@ -3,6 +3,23 @@ import './App.css';
 
 import * as Sentry from "@sentry/react";
 
+// Debug function to check profiling support
+function checkProfilingSupport() {
+  console.log('🔍 Checking profiling support...');
+  
+  // Check if the browser supports the profiling API
+  if ('Profiler' in window) {
+    console.log('✅ Browser supports Profiler API');
+  } else {
+    console.log('❌ Browser does not support Profiler API');
+  }
+  
+  // Check if Sentry is initialized
+  console.log('✅ Sentry client is initialized');
+  console.log('Sentry DSN:', "https://7ba3dd399bcd09c145c91ac1ce022568@o4509714332450816.ingest.us.sentry.io/4509725614735360");
+  console.log('Profiles sample rate: 1.0');
+}
+
 Sentry.init({
   dsn: "https://7ba3dd399bcd09c145c91ac1ce022568@o4509714332450816.ingest.us.sentry.io/4509725614735360",
   
@@ -45,11 +62,37 @@ Sentry.init({
   // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
   tracePropagationTargets: ["localhost" ],
 
-  // profiling
-  profilesSampleRate: 1.0,
+  // profiling - reduced sample rate to avoid rate limits
+  profilesSampleRate: 0.1, // 10% sampling to avoid 429 errors
 });
 
 function App() {
+  React.useEffect(() => {
+    // Check profiling support when component mounts
+    checkProfilingSupport();
+    
+    console.log('✅ App mounted, profiling should be active');
+  }, []);
+
+  const performHeavyOperation = () => {
+    console.log('🚀 Starting heavy operation for profiling...');
+    
+    // Simulate heavy computation to generate profiling data
+    const start = performance.now();
+    
+    // Create some CPU-intensive work (reduced iterations to avoid rate limits)
+    let result = 0;
+    for (let i = 0; i < 100000; i++) {
+      result += Math.sqrt(i) * Math.sin(i);
+    }
+    
+    const end = performance.now();
+    console.log(`⏱️ Heavy operation completed in ${(end - start).toFixed(2)}ms`);
+    console.log(`📊 Result: ${result.toFixed(2)}`);
+    
+    return result;
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -64,7 +107,23 @@ function App() {
         >
           Learn React
         </a>
-        <button onClick={() => {throw new Error("What's happening!");}}>Click me</button>;
+        <div style={{ marginTop: '20px' }}>
+          <button 
+            onClick={performHeavyOperation}
+            style={{ marginRight: '10px', padding: '10px 20px' }}
+          >
+            Test Profiling
+          </button>
+          <button 
+            onClick={() => {
+              console.log('🚀 Triggering error and profiling...');
+              throw new Error("What's happening!");
+            }}
+            style={{ padding: '10px 20px' }}
+          >
+            Trigger Error
+          </button>
+        </div>
       </header>
     </div>
   );
