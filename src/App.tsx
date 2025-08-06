@@ -14,6 +14,7 @@ Sentry.init({
   integrations: [
     Sentry.replayIntegration(),
     Sentry.browserTracingIntegration(),
+    Sentry.browserProfilingIntegration(),
     Sentry.feedbackIntegration({
       // The SDK will automatically create a button and inject it into the DOM
       // You can also customize the button appearance
@@ -43,6 +44,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
   // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
   tracePropagationTargets: ["localhost" ],
+
+  // profiling
+  profilesSampleRate: 1.0,
 });
 
 function App() {

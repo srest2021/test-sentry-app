@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sentry/browser": "^9.40.0",
+    "@sentry/browser": "^10.2.0",
     "@sentry/cli": "^2.50.2",
-    "@sentry/react": "^9.40.0",
+    "@sentry/react": "^10.1.0",
     "@sentry/replay": "^7.116.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -15,6 +15,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "express": "^5.1.0",
     "launchdarkly-js-client-sdk": "^3.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -27,7 +28,7 @@
     "build": "react-scripts build && npm run sentry:sourcemaps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org sentry-test --project javascript-react-la build && sentry-cli sourcemaps upload --org sentry-test --project javascript-react-la build"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org test-organization-0ei --project javascript-react build && sentry-cli sourcemaps upload --org test-organization-0ei --project javascript-react build"
   },
   "eslintConfig": {
     "extends": [
