@@ -6,7 +6,7 @@ import * as SentryBrowser from "@sentry/browser";
 Sentry.init({
   dsn: "http://6baa0a66c8146a8411b7ee3a9f08841f@localhost:8000/2",
   
-  release: `test-app@0.0`,
+  release: `test-app@1.0`,
   
   // Setting this option to true will send default PII data to Sentry.
   // For example, automatic IP address collection on events
