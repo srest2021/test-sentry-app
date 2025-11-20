@@ -2,11 +2,14 @@ import './App.css';
 
 import * as Sentry from "@sentry/react";
 
+const SENTRY_DSN = ""
+const SENTRY_RELEASE = "test-app@1.0";
+const SENTRY_ENVIRONMENT = "development";
 
 Sentry.init({
-  dsn: "",
-  release: `test-app@1.0.0`,
-  environment: "production",
+  dsn: SENTRY_DSN,
+  release: SENTRY_RELEASE,
+  //environment: SENTRY_ENVIRONMENT,
   
   // Setting this option to true will send default PII data to Sentry.
   // For example, automatic IP address collection on events
@@ -54,17 +57,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div style={{ 
+          backgroundColor: '#282c34', 
+          border: '2px solid #61dafb', 
+          borderRadius: '8px', 
+          padding: '15px', 
+          marginBottom: '20px',
+          fontSize: '14px',
+          textAlign: 'left',
+          maxWidth: '600px'
+        }}>
+          <h3 style={{ marginTop: 0, color: '#61dafb' }}>Sentry Configuration</h3>
+          <div>
+            <strong>DSN:</strong> <code style={{ backgroundColor: '#1e1e1e', padding: '2px 6px', borderRadius: '4px' }}>{SENTRY_DSN}</code>
+          </div>
+          <div>
+            <strong>Release:</strong> <code style={{ backgroundColor: '#1e1e1e', padding: '2px 6px', borderRadius: '4px' }}>{SENTRY_RELEASE}</code>
+          </div>
+          <div>
+            <strong>Environment:</strong> <code style={{ backgroundColor: '#1e1e1e', padding: '2px 6px', borderRadius: '4px' }}>{SENTRY_ENVIRONMENT}</code>
+          </div>
+        </div>
+
         <div style={{ marginTop: '10px' }}>
           <button 
             onClick={() => {
