@@ -3,7 +3,7 @@ import './App.css';
 import * as Sentry from "@sentry/react";
 
 const SENTRY_DSN = ""
-const SENTRY_RELEASE = "test-app@1.0";
+const SENTRY_RELEASE = "test-app@1.0.0";
 const SENTRY_ENVIRONMENT = "development";
 
 Sentry.init({
